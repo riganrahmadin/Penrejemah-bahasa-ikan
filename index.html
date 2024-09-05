@@ -9,6 +9,34 @@
     <style>
         body {
             padding-top: 50px;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+
+        .result-box {
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            background-color: #e9ecef;
         }
     </style>
 </head>
@@ -17,26 +45,29 @@
     <div class="container">
         <h1 class="text-center mb-4">Penerjemah Bahasa Ikane</h1>
 
-        <!-- Pilihan penerjemahan -->
-        <div class="mb-3">
-            <label for="translationType" class="form-label">Pilih arah penerjemahan:</label>
-            <select id="translationType" class="form-select">
-                <option value="toIkane">Alfabet (A-Z) ke Bahasa Ikane (Contoh: ABC)</option>
-                <option value="toAlphabet">Bahasa Ikane ke Alfabet (A-Z) (Contoh: BLUK BUL BLUK)</option>
-            </select>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h3>Terjemahkan dari Alfabet ke Bahasa Ikane</h3>
+                <div class="mb-3">
+                    <label for="inputText" class="form-label">Masukkan teks (A-Z):</label>
+                    <input type="text" id="inputText" class="form-control" placeholder="Contoh: ABC" maxlength="26">
+                </div>
+                <button id="translateToIkane" class="btn btn-custom">Terjemahkan</button>
+                <h4 class="mt-4">Hasil Terjemahan:</h4>
+                <div id="resultIkane" class="result-box"></div>
+            </div>
+            <div class="col-md-6">
+                <h3>Terjemahkan dari Bahasa Ikane ke Alfabet</h3>
+                <div class="mb-3">
+                    <label for="inputIkane" class="form-label">Masukkan Bahasa Ikane:</label>
+                    <input type="text" id="inputIkane" class="form-control" placeholder="Contoh: BLUK BUL"
+                        maxlength="100">
+                </div>
+                <button id="translateToAlphabet" class="btn btn-custom">Terjemahkan</button>
+                <h4 class="mt-4">Hasil Terjemahan:</h4>
+                <div id="resultAlphabet" class="result-box"></div>
+            </div>
         </div>
-
-        <!-- Input teks -->
-        <div class="mb-3">
-            <label for="inputText" class="form-label">Masukkan teks:</label>
-            <input type="text" id="inputText" class="form-control" placeholder="Masukkan Sesuai petunjuk">
-        </div>
-
-        <button id="translateBtn" class="btn btn-primary">Terjemahkan</button>
-
-        <!-- Hasil terjemahan -->
-        <h3 class="mt-4">Hasil:</h3>
-        <div id="result" class="alert alert-info" role="alert"></div>
     </div>
 
     <!-- Link ke file JavaScript eksternal -->

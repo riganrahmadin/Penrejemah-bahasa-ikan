@@ -28,40 +28,44 @@ const translationMap = {
   Z: "BLUKBULBUL",
 };
 
-// Membalikkan translationMap untuk penerjemahan Bahasa Ikane ke alfabet
-const reverseTranslationMap = {};
-for (const [key, value] of Object.entries(translationMap)) {
-  reverseTranslationMap[value] = key;
-}
+// Invers peta terjemahan dari Bahasa Ikane ke huruf
+const reverseTranslationMap = Object.fromEntries(
+  Object.entries(translationMap).map(([key, value]) => [value, key])
+);
 
-// Menambahkan event listener pada tombol
-document.getElementById("translateBtn").addEventListener("click", function () {
-  const translationType = document.getElementById("translationType").value;
-  const inputText = document.getElementById("inputText").value.trim();
+document
+  .getElementById("translateToIkane")
+  .addEventListener("click", function () {
+    const inputText = document.getElementById("inputText").value.toUpperCase();
+    let resultText = "";
 
-  let resultText = "";
-
-  if (translationType === "toIkane") {
-    // Menerjemahkan dari alfabet ke Bahasa Ikane
-    for (let char of inputText.toUpperCase()) {
+    for (let char of inputText) {
       if (translationMap[char]) {
         resultText += translationMap[char] + " ";
       } else {
-        resultText += "[?] "; // Jika karakter tidak valid
+        resultText += "[?] ";
       }
     }
-  } else if (translationType === "toAlphabet") {
-    // Menerjemahkan dari Bahasa Ikane ke alfabet
-    const words = inputText.split(" ");
-    for (let word of words) {
+
+    document.getElementById("resultIkane").textContent = resultText.trim();
+  });
+
+document
+  .getElementById("translateToAlphabet")
+  .addEventListener("click", function () {
+    const inputIkane = document
+      .getElementById("inputIkane")
+      .value.toUpperCase();
+    const ikaneWords = inputIkane.split(" ");
+    let resultText = "";
+
+    for (let word of ikaneWords) {
       if (reverseTranslationMap[word]) {
         resultText += reverseTranslationMap[word];
       } else {
-        resultText += "[?]"; // Jika karakter tidak valid
+        resultText += "[?]";
       }
     }
-  }
 
-  // Menampilkan hasil terjemahan
-  document.getElementById("result").textContent = resultText.trim();
-});
+    document.getElementById("resultAlphabet").textContent = resultText.trim();
+  });
